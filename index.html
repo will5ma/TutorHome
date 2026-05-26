@@ -1082,8 +1082,11 @@
     .modal-box {
       background: #ffffff;
       border-radius: 20px;
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
+      max-height: 580px;
+      display: flex;
+      flex-direction: column;
       box-shadow: 0 24px 80px rgba(0,0,0,0.25);
       animation: modalIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
       overflow: hidden;
@@ -1130,6 +1133,96 @@
 
     .modal-body {
       padding: 1.6rem 1.8rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-body::-webkit-scrollbar { width: 5px; }
+    .modal-body::-webkit-scrollbar-track { background: transparent; }
+    .modal-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
+    .modal-body::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.28); }
+
+    /* ── PRIVACY POLICY ── */
+    .privacy-intro {
+      font-size: 0.88rem;
+      color: #3a3a3c;
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .privacy-date {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #0071e3;
+      background: rgba(0,113,227,0.08);
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1.4rem;
+    }
+
+    .privacy-article {
+      margin-bottom: 1.4rem;
+    }
+
+    .privacy-article:last-child { margin-bottom: 0; }
+
+    .privacy-article-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .privacy-article-title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 0.9rem;
+      background: #0071e3;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .privacy-article-body {
+      font-size: 0.83rem;
+      color: #3a3a3c;
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+    }
+
+    .privacy-article-body p { margin-bottom: 0.55rem; }
+    .privacy-article-body p:last-child { margin-bottom: 0; }
+
+    .privacy-highlight {
+      background: #f5f5f7;
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: #3a3a3c;
+      line-height: 1.7;
+    }
+
+    .privacy-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      background: rgba(0,113,227,0.05);
+      border: 1px solid rgba(0,113,227,0.12);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: #3a3a3c;
+      line-height: 1.7;
     }
 
     .modal-alert {
@@ -1651,7 +1744,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-legal">
-        <a href="#">개인정보처리방침</a>
+        <a href="#" onclick="openPrivacyModal(event)">개인정보처리방침</a>
         <a href="#" onclick="openEmailModal(event)">이메일수집거부</a>
       </div>
       <div class="footer-info">
@@ -1662,6 +1755,155 @@
     </div>
   </div>
 </footer>
+
+<!-- ── PRIVACY MODAL ── -->
+<div class="modal-backdrop" id="privacyModal" onclick="closePrivacyModalOutside(event)">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+    <div class="modal-header">
+      <span class="modal-title" id="privacyTitle">개인정보처리방침</span>
+      <button class="modal-close" onclick="closePrivacyModal()" aria-label="닫기">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="privacy-intro">
+        &lt;웨어러블서치&gt;('<a href="http://www.wearablesearch.co.kr" style="color:#0071e3;">http://www.wearablesearch.co.kr</a>' 이하 '웨어러블서치')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+      </p>
+      <span class="privacy-date">○ 이 개인정보처리방침은 2026년 5월 24일부터 적용됩니다.</span>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제1조 (개인정보의 처리 목적)</div>
+        <div class="privacy-article-body">
+          <p>&lt;웨어러블서치&gt;은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+          <div class="privacy-highlight">
+            1. 홈페이지 회원가입 및 관리 — 회원 가입의사 확인, 회원자격 유지·관리, 각종 고지·통지 등<br>
+            2. 재화 또는 서비스 제공 — 서비스 제공, 콘텐츠 제공<br>
+            3. 마케팅 및 광고에의 활용 — 접속빈도 파악 또는 서비스 이용 통계
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제2조 (개인정보의 처리 및 보유 기간)</div>
+        <div class="privacy-article-body">
+          <p>① &lt;웨어러블서치&gt;은(는) 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.</p>
+          <div class="privacy-highlight">
+            홈페이지 회원가입 및 관리 관련 개인정보 보유근거: 회원가입일로부터 서비스 제공 기간 동안 보유·이용<br>
+            · 신용정보 기록 : 3년 &nbsp;· 소비자 불만·분쟁 기록 : 3년<br>
+            · 대금결제 및 재화 공급 기록 : 5년 &nbsp;· 계약·청약철회 기록 : 5년<br>
+            · 표시/광고 기록 : 6개월
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제3조 (처리하는 개인정보의 항목)</div>
+        <div class="privacy-article-body">
+          <div class="privacy-highlight">
+            &lt;설문조사&gt;<br>
+            · 필수항목: 성명, 핸드폰 번호, 이메일 주소<br>
+            · 선택항목: 없음
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제5조 (개인정보처리의 위탁에 관한 사항)</div>
+        <div class="privacy-article-body">
+          <p>① &lt;웨어러블서치&gt;은(는) 위탁계약 체결 시 「개인정보 보호법」 제26조에 따라 위탁업무 수행목적 외 개인정보 처리금지, 기술적·관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리·감독, 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.</p>
+          <p>② 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</p>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제6조 (개인정보의 파기절차 및 파기방법)</div>
+        <div class="privacy-article-body">
+          <p>① &lt;웨어러블서치&gt;은(는) 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.</p>
+          <div class="privacy-highlight">
+            · 파기절차: 개인정보 보호책임자의 승인을 받아 파기<br>
+            · 전자적 파일: 기록을 재생할 수 없는 기술적 방법 사용<br>
+            · 출력물: 분쇄기로 분쇄하거나 소각
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제7조 (정보주체와 법정대리인의 권리·의무 및 행사방법)</div>
+        <div class="privacy-article-body">
+          <p>① 정보주체는 웨어러블서치에 대해 언제든지 개인정보 열람·정정·삭제·처리정지 요구 등의 권리를 행사할 수 있습니다.</p>
+          <p>② 권리 행사는 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며, 웨어러블서치은(는) 이에 대해 지체 없이 조치하겠습니다.</p>
+          <p>③ 법정대리인이나 위임을 받은 대리인을 통하여 행사할 수 있습니다. 이 경우 위임장을 제출하셔야 합니다.</p>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제8조 (개인정보의 안전성 확보조치)</div>
+        <div class="privacy-article-body">
+          <div class="privacy-highlight">
+            1. 내부관리계획의 수립 및 시행<br>
+            2. 개인정보의 암호화 — 비밀번호 암호화 저장, 중요 데이터 파일 및 전송 데이터 암호화
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제9조 (쿠키의 설치·운영 및 거부)</div>
+        <div class="privacy-article-body">
+          <p>① 웨어러블서치은(는) 이용자에게 맞춤서비스를 제공하기 위해 쿠키(cookie)를 사용합니다.</p>
+          <div class="privacy-highlight">
+            · 사용 목적: 방문 및 이용형태, 인기 검색어, 보안접속 여부 파악<br>
+            · 거부 방법: 웹브라우저 상단의 도구 &gt; 인터넷 옵션 &gt; 개인정보 메뉴에서 설정<br>
+            · 쿠키 저장 거부 시 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제10조 (추가적인 이용·제공 판단기준)</div>
+        <div class="privacy-article-body">
+          <div class="privacy-highlight">
+            ▶ 추가 이용·제공 목적이 당초 수집 목적과 관련성이 있는지 여부<br>
+            ▶ 수집 정황에 비추어 추가적 이용·제공에 대한 예측 가능성이 있는지 여부<br>
+            ▶ 추가적 이용·제공이 정보주체의 이익을 부당하게 침해하는지 여부<br>
+            ▶ 가명처리 또는 암호화 등 안전성 확보에 필요한 조치를 하였는지 여부
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제11조 (개인정보 보호책임자)</div>
+        <div class="privacy-article-body">
+          <div class="privacy-contact">
+            ▶ 개인정보 보호책임자<br>
+            성명: 마정호 &nbsp;|&nbsp; 직급: 대표<br>
+            연락처: <a href="mailto:jungho.ma@wearablesearch.com" style="color:#0071e3;">jungho.ma@wearablesearch.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제12조 (개인정보 열람청구 접수·처리 부서)</div>
+        <div class="privacy-article-body">
+          <p>정보주체는 「개인정보 보호법」 제35조에 따른 개인정보의 열람 청구를 아래의 부서에 할 수 있습니다.</p>
+          <div class="privacy-contact">
+            ▶ 개인정보 열람청구 접수·처리 부서<br>
+            연락처: <a href="mailto:jungho.ma@wearablesearch.com" style="color:#0071e3;">jungho.ma@wearablesearch.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-article">
+        <div class="privacy-article-title">제13조 (정보주체의 권익침해에 대한 구제방법)</div>
+        <div class="privacy-article-body">
+          <div class="privacy-highlight">
+            1. 개인정보분쟁조정위원회: ☎ 1833-6972 (www.kopico.go.kr)<br>
+            2. 개인정보침해신고센터: ☎ 118 (privacy.kisa.or.kr)<br>
+            3. 대검찰청: ☎ 1301 (www.spo.go.kr)<br>
+            4. 경찰청: ☎ 182 (ecrm.cyber.go.kr)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ── EMAIL MODAL ── -->
 <div class="modal-backdrop" id="emailModal" onclick="closeEmailModalOutside(event)">
@@ -1698,6 +1940,22 @@
 </div>
 
 <script>
+  /* ── PRIVACY MODAL ── */
+  function openPrivacyModal(e) {
+    e.preventDefault();
+    document.getElementById('privacyModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePrivacyModal() {
+    document.getElementById('privacyModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closePrivacyModalOutside(e) {
+    if (e.target === document.getElementById('privacyModal')) closePrivacyModal();
+  }
+
   /* ── EMAIL MODAL ── */
   function openEmailModal(e) {
     e.preventDefault();
@@ -1715,7 +1973,7 @@
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeEmailModal();
+    if (e.key === 'Escape') { closeEmailModal(); closePrivacyModal(); }
   });
 
   /* ── CURSOR GRADIENT ORB ── */
