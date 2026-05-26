@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="마정호 - B2B, B2C 마케팅 전략가 | 기술 기반 비즈니스 컨설턴트" />
+  <meta property="og:title" content="마정호 | 마케팅 전략가 & 비즈니스 컨설턴트" />
+  <meta property="og:image" content="Image.png" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <title>마정호 | 마케팅 전략가 & 비즈니스 컨설턴트</title>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Apple SD Gothic Neo',
+                   'Noto Sans KR', 'Helvetica Neue', sans-serif;
+      background: #ffffff;
+      color: #1d1d1f;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── CURSOR ORB (interactive gradient) ── */
+    .cursor-orb {
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle,
+        hsla(215, 90%, 60%, 0.10) 0%,
+        hsla(270, 80%, 60%, 0.06) 40%,
+        transparent 70%
+      );
+      transition: background 0.6s ease;
+      will-change: left, top;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-logo a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 28px; width: 28px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .nav-logo-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: #1d1d1f;
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-cta-btn {
+      background: #0071e3;
+      color: #fff !important;
+      opacity: 1 !important;
+      padding: 0.42rem 1.1rem;
+      border-radius: 20px;
+      font-size: 0.82rem !important;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta-btn:hover { background: #0077ed !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .hero-img-bg {
+      position: absolute;
+      inset: -5%;
+      background-image: url('Image.png');
+      background-size: cover;
+      background-position: center;
+      filter: blur(22px) brightness(1.05) saturate(0.85);
+      opacity: 0.18;
+      z-index: 0;
+    }
+
+    .hero-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.82) 0%,
+        rgba(255,255,255,0.72) 50%,
+        rgba(255,255,255,0.88) 100%
+      );
+      z-index: 0;
+    }
+
+    .hero-mesh {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      transition: background 0.4s ease;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 6rem 2rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0071e3;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-size: clamp(72px, 12vw, 120px);
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      line-height: 1.0;
+      color: #1d1d1f;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: #6e6e73;
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .hero-quote {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+      background: linear-gradient(135deg, #0071e3 0%, #7c3aed 50%, #db2777 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 3.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      display: inline-flex;
+    }
+
+    .stat-item {
+      padding: 1.5rem 2.2rem;
+      text-align: center;
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      display: block;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1d1d1f;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: #6e6e73;
+      margin-top: 0.3rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-blue {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #0071e3;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: all 0.25s;
+    }
+
+    .btn-blue:hover {
+      background: #0077ed;
+      transform: scale(1.02);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: #0071e3;
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border: 1.5px solid #0071e3;
+      transition: all 0.25s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(0,113,227,0.06);
+      transform: scale(1.02);
+    }
+
+    /* ── SECTION BASE ── */
+    section { position: relative; }
+    .section-inner { max-width: 1080px; margin: 0 auto; padding: 7rem 2rem; }
+
+    /* 홀수 섹션: 흰색, 짝수 섹션: 연회색 — 일관된 리듬 */
+    #profile     { background: #f5f5f7; }
+    #competencies{ background: #ffffff; }
+    #achievements{ background: #f5f5f7; }
+    #curriculum  { background: #ffffff; }
+    #lectures    { background: #f5f5f7; }
+
+    .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #0071e3;
+      display: block;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: #1d1d1f;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-body {
+      font-size: 1.05rem;
+      color: #6e6e73;
+      letter-spacing: -0.01em;
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ── PROFILE ── */
+    #profile { background: #f5f5f7; }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .profile-photo-wrap {
+      position: sticky;
+      top: 72px;
+    }
+
+    .profile-photo {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.14);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .profile-name-badge {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .profile-name-badge strong {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1d1d1f;
+    }
+
+    .profile-name-badge span {
+      font-size: 0.88rem;
+      color: #6e6e73;
+    }
+
+    .profile-text { padding-top: 0.5rem; }
+
+    .profile-intro {
+      font-size: 1.08rem;
+      color: #3a3a3c;
+      line-height: 1.85;
+      letter-spacing: -0.015em;
+      margin-bottom: 3rem;
+    }
+
+    .strength-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .strength-item {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.4rem 1.6rem;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .strength-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+
+    .s-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 2.4rem;
+      text-align: center;
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .s-text strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .s-text p {
+      font-size: 0.85rem;
+      color: #6e6e73;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── COMPETENCIES ── */
+    #competencies { background: #ffffff; }
+
+    .comp-header {
+      max-width: 600px;
+      margin-bottom: 4rem;
+    }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .comp-card {
+      padding: 2.2rem;
+      border-radius: 20px;
+      background: #f5f5f7;
+      border: 1px solid rgba(0,0,0,0.00);
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .comp-card:hover {
+      background: #ffffff;
+      border-color: rgba(0,0,0,0.08);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+      transform: translateY(-4px);
+    }
+
+    .comp-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .comp-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.6rem;
+    }
+
+    .comp-desc {
+      font-size: 0.88rem;
+      color: #6e6e73;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements { background: #f5f5f7; }
+
+    .achieve-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .achieve-card {
+      padding: 2.4rem;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+
+    .achieve-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    }
+
+    .achieve-num {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #0071e3, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .achieve-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .achieve-detail {
+      font-size: 0.83rem;
+      color: #6e6e73;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+
+    .achieve-award {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+      margin-top: 1.2rem;
+      padding: 2rem 2.4rem;
+      background: linear-gradient(135deg, #fffbea 0%, #fef3c7 60%, #fde68a33 100%);
+      border: 1px solid rgba(217,170,0,0.22);
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(180,130,0,0.10);
+      transition: all 0.3s;
+    }
+
+    .achieve-award:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(180,130,0,0.18);
+    }
+
+    .achieve-award-img {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 16px rgba(180,130,0,0.30));
+    }
+
+    .achieve-award-text {}
+
+    .achieve-award-num {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, #b45309, #d97706, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .achieve-award-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .achieve-award-detail {
+      font-size: 0.88rem;
+      color: #78716c;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── CURRICULUM ── */
+    #curriculum { background: #ffffff; }
+
+    .curr-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: 0.65rem 1.2rem;
+      border: none;
+      background: transparent;
+      color: #6e6e73;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      color: #0071e3;
+      border-bottom-color: #0071e3;
+    }
+
+    .tab-btn:hover:not(.active) { color: #1d1d1f; }
+
+    .curr-content { display: none; }
+    .curr-content.active {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      animation: fadeUp 0.3s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .curr-card {
+      padding: 2rem;
+      background: #f5f5f7;
+      border-radius: 18px;
+      transition: all 0.2s;
+    }
+
+    .curr-card:hover {
+      background: #ebebed;
+    }
+
+    .curr-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .curr-card-desc {
+      font-size: 0.88rem;
+      color: #6e6e73;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── LECTURES ── */
+    #lectures { background: #f5f5f7; }
+
+    .lecture-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .lecture-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2.4rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: all 0.3s;
+    }
+
+    .lecture-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    }
+
+    .lecture-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .lecture-tag {
+      display: inline-block;
+      font-size: 0.70rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0071e3;
+      background: rgba(0,113,227,0.08);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    .lecture-num {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #aeaeb2;
+    }
+
+    .lecture-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+    }
+
+    .lecture-overview {
+      font-size: 0.88rem;
+      color: #6e6e73;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+    }
+
+    .lecture-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .lecture-list li {
+      font-size: 0.84rem;
+      color: #3a3a3c;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+    }
+
+    .lecture-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0.2rem;
+      color: #0071e3;
+      font-weight: 700;
+    }
+
+    .lecture-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 1.2rem;
+      margin-top: auto;
+    }
+
+    .btn-apply-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #0071e3;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: background 0.2s;
+    }
+
+    .btn-apply-sm:hover { background: #0077ed; }
+
+    .btn-apply-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      color: #0071e3;
+      text-decoration: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border: 1.5px solid rgba(0,113,227,0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-apply-ghost:hover {
+      border-color: #0071e3;
+      background: rgba(0,113,227,0.04);
+    }
+
+    /* ── CTA ── */
+    #consult {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg,
+        #0a0a0a 0%,
+        #1a1a2e 40%,
+        #16213e 70%,
+        #0f3460 100%
+      );
+    }
+
+    .cta-mesh {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 10% 50%, rgba(0,113,227,0.25), transparent),
+        radial-gradient(ellipse 50% 60% at 90% 30%, rgba(124,58,237,0.20), transparent),
+        radial-gradient(ellipse 40% 40% at 50% 100%, rgba(219,39,119,0.15), transparent);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 8rem 2rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .cta-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.50);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .cta-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: #ffffff;
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-desc {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: -0.015em;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .cta-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .cta-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 1.6rem 2rem;
+      color: #ffffff;
+      min-width: 180px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s;
+    }
+
+    .cta-card:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-3px);
+    }
+
+    .cta-card-icon { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
+    .cta-card-title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+    .cta-card-desc { font-size: 0.80rem; color: rgba(255,255,255,0.45); }
+
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #ffffff;
+      color: #1d1d1f;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: all 0.2s;
+    }
+
+    .btn-white:hover { background: #f5f5f7; transform: scale(1.02); }
+
+    .btn-white-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-white-ghost:hover { border-color: rgba(255,255,255,0.70); transform: scale(1.02); }
+
+    .cta-contact {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1d1d1f;
+      padding: 4rem 2rem 3rem;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo img {
+      height: 28px; width: 28px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .footer-logo-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .social-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: rgba(255,255,255,0.60);
+      transition: all 0.2s;
+    }
+
+    .social-icon:hover {
+      background: rgba(255,255,255,0.14);
+      color: #ffffff;
+    }
+
+    .footer-col h4 {
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.1rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.80); }
+
+    .footer-bottom {}
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.30);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-legal a:hover { color: rgba(255,255,255,0.60); }
+
+    .footer-info {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.8;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-copy {
+      margin-top: 1rem;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── GRADIENT DIVIDER ── */
+    .gradient-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.08) 70%, transparent);
+      width: 100%;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-photo-wrap { position: static; max-width: 300px; }
+      .comp-grid { grid-template-columns: 1fr; }
+      .achieve-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .achieve-grid { grid-template-columns: 1fr; }
+      .lecture-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .section-inner { padding: 5rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-stats { flex-direction: column; display: flex; width: 100%; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+      .stat-item:last-child { border-bottom: none; }
+      .curr-content.active { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-cards { flex-direction: column; align-items: center; }
+      .hero-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Interactive cursor gradient orb -->
+<div class="cursor-orb" id="cursorOrb"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <a href="https://wearablesearch.co.kr/" target="_blank" rel="noopener">
+      <img src="logo.png" alt="Wearable Search" />
+      <span class="nav-logo-name">Wearable Search</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#profile">강사 소개</a></li>
+    <li><a href="#competencies">전문 역량</a></li>
+    <li><a href="#curriculum">커리큘럼</a></li>
+    <li><a href="#lectures">강의</a></li>
+    <li><a href="#consult" class="nav-cta-btn">강의 신청</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-img-bg"></div>
+  <div class="hero-img-overlay"></div>
+  <div class="hero-mesh" id="heroMesh"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">B2B · B2C 마케팅 전략가</span>
+    <h1 class="hero-name">마정호</h1>
+    <p class="hero-subtitle">기술 기반 비즈니스 컨설턴트 · 데이터 마케팅 전문가</p>
+    <p class="hero-quote">"데이터로 증명하고, 기술로 설득하는 마케팅 전문가"</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">1,717%</span>
+        <span class="stat-label">크라우드 펀딩 달성</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">60억</span>
+        <span class="stat-label">투자 유치 견인</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2025</span>
+        <span class="stat-label">올해의 blog</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2만+</span>
+        <span class="stat-label">소셜 미디어 팔로워</span>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#lectures" class="btn-blue">강의 목록 보기</a>
+      <a href="#consult" class="btn-ghost">컨설팅 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- ── PROFILE ── -->
+<section id="profile">
+  <div class="section-inner">
+    <div class="profile-grid">
+      <div class="profile-photo-wrap reveal">
+        <div class="profile-photo">
+          <img src="junghoma.jpg" alt="마정호 강사" />
+        </div>
+        <div class="profile-name-badge">
+          <strong>마정호</strong>
+          <span>Wearable Search 대표</span>
+        </div>
+      </div>
+      <div class="profile-text reveal">
+        <span class="eyebrow">About</span>
+        <h2 class="section-title">물리학 석사 출신의<br>실전 마케팅 전략가</h2>
+        <p class="profile-intro" style="margin-top: 1.2rem;">
+          물리학 석사의 분석적 사고를 바탕으로 대기업부터 스타트업까지,
+          시장 분석·제품 로드맵 수립·투자 유치까지 마케팅의 전 과정을 직접 주도해온 실전형 전략가입니다.
+          영업·개발·생산 부서와의 유기적인 조율을 통해 기업의 비전을 실질적인 성과로 연결합니다.
+        </p>
+        <ul class="strength-list">
+          <li class="strength-item">
+            <span class="s-icon">🔬</span>
+            <div class="s-text">
+              <strong>물리학 전공의 분석적 통찰력</strong>
+              <p>물리학 석사 출신의 논리적 사고로 데이터 기반 마케팅을 수행</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <span class="s-icon">🎯</span>
+            <div class="s-text">
+              <strong>실전 중심의 B2B 전략가</strong>
+              <p>대기업부터 스타트업까지 시장 분석, 제품 로드맵 수립, 투자 유치 전 과정을 주도</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <span class="s-icon">🏆</span>
+            <div class="s-text">
+              <strong>검증된 성과</strong>
+              <p>크라우드 펀딩 <strong>1,717% 달성</strong> 정부 국책과제 및 창업 지원사업 평가위원 역임.</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <span class="s-icon">🤝</span>
+            <div class="s-text">
+              <strong>폭넓은 커뮤니케이션</strong>
+              <p>영업·개발·생산 부서와의 조율로 기업 비전을 성과로 연결하는 실천형 전략가</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- ── COMPETENCIES ── -->
+<section id="competencies">
+  <div class="section-inner">
+    <div class="comp-header reveal">
+      <span class="eyebrow">Core Competencies</span>
+      <h2 class="section-title">핵심 전문 역량</h2>
+      <p class="section-body" style="margin-top: 0.75rem;">데이터부터 전략, 코칭까지 — 비즈니스 성장의 전 과정을 커버합니다.</p>
+    </div>
+    <div class="comp-grid reveal">
+      <div class="comp-card">
+        <span class="comp-icon">📊</span>
+        <div class="comp-title">전략 기획</div>
+        <div class="comp-desc">B2B/B2C 마케팅 전략 수립, 제품 로드맵(Roadmap) 구축, 신시장 개척 및 IR 자료 작성</div>
+      </div>
+      <div class="comp-card">
+        <span class="comp-icon">📈</span>
+        <div class="comp-title">데이터 마케팅</div>
+        <div class="comp-desc">구글 애널리틱스 및 데이터 기반 잠재고객 분석, 소셜 미디어(팔로워 2만 명+) 운영 및 광고 효율 최적화</div>
+      </div>
+      <div class="comp-card">
+        <span class="comp-icon">💡</span>
+        <div class="comp-title">비즈니스 코칭</div>
+        <div class="comp-desc">창업진흥원·창업중심대학 평가위원, 디자인 씽킹 기반 창업 컨설팅 및 강연</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- ── ACHIEVEMENTS ── -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="achieve-intro reveal">
+      <div>
+        <span class="eyebrow">Key Achievements</span>
+        <h2 class="section-title">숫자로 보는<br>검증된 성과</h2>
+      </div>
+      <p class="section-body">
+        크라우드 펀딩 1,717% 달성부터 60억 투자 유치 견인까지.
+        경기지역경제플랫폼 대상(2021), 세대융합형 창업 서포터즈 우수 활동(2024)을 수상한
+        실전에서 검증된 마케팅 전략가입니다.
+      </p>
+    </div>
+    <div class="achieve-grid reveal">
+      <div class="achieve-card">
+        <div class="achieve-num">1,717%</div>
+        <div class="achieve-label">크라우드 펀딩 목표 달성</div>
+        <div class="achieve-detail">스타트업 크라우드 펀딩 지원을 통해 목표 대비 최대 1,717% 달성</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">60억</div>
+        <div class="achieve-label">투자 유치 견인 & 국책과제 확보</div>
+        <div class="achieve-detail">60억 투자유치 견인, 국책과제(BK21, World Class 300 등) 확보를 성공적으로 이끌었던 경험</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">2025</div>
+        <div class="achieve-label">올해의 블로그 선정</div>
+        <div class="achieve-detail">네이버 Geekstarter 블로그가 2025년 올해의 블로그로 선정</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- ── CURRICULUM ── -->
+<section id="curriculum">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="eyebrow">Curriculum</span>
+      <h2 class="section-title">교육 커리큘럼</h2>
+      <p class="section-body" style="margin-top: 0.75rem; margin-bottom: 3rem;">비즈니스 성장 단계에 맞는 맞춤형 커리큘럼을 제공합니다.</p>
+    </div>
+    <div class="curr-tabs reveal">
+      <button class="tab-btn active" onclick="showTab('data', this)">📊 데이터 분석</button>
+      <button class="tab-btn" onclick="showTab('online', this)">💻 온라인 마케팅</button>
+      <button class="tab-btn" onclick="showTab('shopping', this)">🛒 쇼핑몰·펀딩</button>
+      <button class="tab-btn" onclick="showTab('ai', this)">🤖 AI 마케팅</button>
+    </div>
+    <div id="tab-data" class="curr-content active reveal">
+      <div class="curr-card">
+        <div class="curr-card-title">🔍 고객 경험 분석</div>
+        <div class="curr-card-desc">구글 애널리틱스를 활용한 웹사이트 성과 진단 및 사용자 행동 데이터 시각화</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-card-title">⚡ 전환 최적화</div>
+        <div class="curr-card-desc">유입 고객의 구매 전환율(CVR) 및 전환 가치 극대화를 위한 전략적 분석</div>
+      </div>
+    </div>
+    <div id="tab-online" class="curr-content reveal">
+      <div class="curr-card">
+        <div class="curr-card-title">🎯 타겟 마케팅</div>
+        <div class="curr-card-desc">창업 초기 이벤트 프로모션 및 네이버 블로그, 카페 활성화로 커뮤니티 고객 확보</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-card-title">💰 유료 광고 전략</div>
+        <div class="curr-card-desc">구글 GDN, 유튜브, 검색광고 캠페인 운영을 통한 전환율 극대화</div>
+      </div>
+    </div>
+    <div id="tab-shopping" class="curr-content reveal">
+      <div class="curr-card">
+        <div class="curr-card-title">🏪 채널 전략</div>
+        <div class="curr-card-desc">스마트스토어, 카카오쇼핑 등 이커머스 입점 및 크라우드 펀딩 플랫폼별 특화 판매 전략 습득</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-card-title">⚙️ 운영 최적화</div>
+        <div class="curr-card-desc">자사몰 성장을 위한 운영 노하우와 고객 유입을 극대화하는 쇼핑몰 최적화 기법</div>
+      </div>
+    </div>
+    <div id="tab-ai" class="curr-content reveal">
+      <div class="curr-card">
+        <div class="curr-card-title">🧠 데이터 기반 인사이트</div>
+        <div class="curr-card-desc">고객 행동 데이터를 머신러닝으로 분석해 타겟 세분화 및 맞춤형 전략 수립</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-card-title">🤖 업무 자동화</div>
+        <div class="curr-card-desc">마케팅 캠페인 운영, 데이터 분석 등 반복 업무를 자동화하여 생산성 극대화</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- ── LECTURES ── -->
+<section id="lectures">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="eyebrow">Lectures</span>
+      <h2 class="section-title">강의 목록</h2>
+      <p class="section-body" style="margin-top: 0.75rem; margin-bottom: 3.5rem;">실전 경험에서 나온 검증된 강의로 비즈니스 성장을 가속합니다.</p>
+    </div>
+    <div class="lecture-grid reveal">
+
+      <div class="lecture-card">
+        <div class="lecture-card-top">
+          <span class="lecture-tag">AI 활용</span>
+          <span class="lecture-num">01</span>
+        </div>
+        <div class="lecture-title">매출을 부르는<br>디지털 마케팅 전략</div>
+        <div class="lecture-overview">생성형 AI를 마케팅 업무에 접목하여 생산성을 극대화하고, 타겟 세분화부터 콘텐츠 생성까지 자동화하는 실전 전략.</div>
+        <ul class="lecture-list">
+          <li>마케팅 업무의 AI 전환 (도구 선정 및 프롬프트 엔지니어링)</li>
+          <li>AI를 활용한 초개인화 콘텐츠 대량 생성</li>
+          <li>실시간 캠페인 최적화 및 ROI 분석 자동화</li>
+          <li>AI 기반 마케팅 에이전트 활용 및 성과 극대화</li>
+        </ul>
+        <div class="lecture-footer">
+          <a href="https://forms.gle/Q3YURPWBqDyGFsCt5" target="_blank" rel="noopener" class="btn-apply-sm">신청하기 →</a>
+        </div>
+      </div>
+
+      <div class="lecture-card">
+        <div class="lecture-card-top">
+          <span class="lecture-tag">쇼핑몰 실전</span>
+          <span class="lecture-num">02</span>
+        </div>
+        <div class="lecture-title">이커머스 입점부터<br>자사몰 최적화까지</div>
+        <div class="lecture-overview">플랫폼별 특징을 이해하고, 창업자가 직접 매출을 일으키는 실전 판매 및 운영 노하우.</div>
+        <ul class="lecture-list">
+          <li>이커머스 플랫폼 채널별 입점 전략</li>
+          <li>자사몰 구축 및 운영 최적화 (쇼핑몰 제작 실습)</li>
+          <li>판매 촉진 핵심 노하우 및 고객 경험(UX) 설계</li>
+          <li>매출 데이터 분석 기반 지속 가능한 판매 전략</li>
+        </ul>
+        <div class="lecture-footer">
+          <a href="#consult" class="btn-apply-ghost">문의하기</a>
+        </div>
+      </div>
+
+      <div class="lecture-card">
+        <div class="lecture-card-top">
+          <span class="lecture-tag">성장 마케팅</span>
+          <span class="lecture-num">03</span>
+        </div>
+        <div class="lecture-title">예비·신규 창업자를 위한<br>마케팅 실무 과정</div>
+        <div class="lecture-overview">창업 초기부터 성장기까지 실전 마케팅 전략 수립 및 실행 방법론 전수.</div>
+        <ul class="lecture-list">
+          <li>창업 초기 마케팅 전략 수립 및 채널 선정</li>
+          <li>타겟 고객 분석 및 페르소나 설계</li>
+          <li>성장 단계별 마케팅 실행 로드맵</li>
+        </ul>
+        <div class="lecture-footer">
+          <a href="#consult" class="btn-apply-ghost">문의하기</a>
+        </div>
+      </div>
+
+      <div class="lecture-card">
+        <div class="lecture-card-top">
+          <span class="lecture-tag">크라우드 펀딩</span>
+          <span class="lecture-num">04</span>
+        </div>
+        <div class="lecture-title">크라우드 펀딩<br>성공 패키지</div>
+        <div class="lecture-overview">1,717% 달성 경험에서 나온 크라우드 펀딩 기획부터 운영, 마케팅까지 완성형 패키지.</div>
+        <ul class="lecture-list">
+          <li>플랫폼별 크라우드 펀딩 전략 (텀블벅, 와디즈 등)</li>
+          <li>제품 스토리텔링 및 콘텐츠 기획</li>
+          <li>SNS 바이럴 마케팅 및 펀딩 극대화 전략</li>
+        </ul>
+        <div class="lecture-footer">
+          <a href="#consult" class="btn-apply-ghost">문의하기</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="consult">
+  <div class="cta-bg"></div>
+  <div class="cta-mesh"></div>
+  <div class="cta-inner reveal">
+    <span class="cta-eyebrow">Consulting</span>
+    <h2 class="cta-title">비즈니스 성장을<br>함께 시작하세요</h2>
+    <p class="cta-desc">맞춤형 컨설팅과 교육으로 귀사의 마케팅 성과를 극대화합니다.</p>
+    <div class="cta-cards">
+      <div class="cta-card">
+        <span class="cta-card-icon">📋</span>
+        <div class="cta-card-title">마케팅 전략 컨설팅</div>
+        <div class="cta-card-desc">B2B/B2C 전략 수립부터 실행까지</div>
+      </div>
+      <div class="cta-card">
+        <span class="cta-card-icon">📦</span>
+        <div class="cta-card-title">패키지 교육 프로그램</div>
+        <div class="cta-card-desc">맞춤형 강의 및 워크숍 기획</div>
+      </div>
+      <div class="cta-card">
+        <span class="cta-card-icon">🚀</span>
+        <div class="cta-card-title">스타트업 성장 지원</div>
+        <div class="cta-card-desc">펀딩, 투자 유치, IR 자료 작성</div>
+      </div>
+    </div>
+    <div class="cta-btns">
+      <a href="https://forms.gle/Q3YURPWBqDyGFsCt5" target="_blank" rel="noopener" class="btn-white">신청서 작성하기 →</a>
+      <a href="mailto:jungho.ma@wearablesearch.com" class="btn-white-ghost">이메일 문의</a>
+    </div>
+    <p class="cta-contact">대표전화: 0507-1452-5680 · jungho.ma@wearablesearch.com</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="https://wearablesearch.co.kr/" target="_blank" rel="noopener" class="footer-logo">
+          <img src="logo.png" alt="Wearable Search" />
+          <span class="footer-logo-name">Wearable Search</span>
+        </a>
+        <p class="footer-tagline">데이터로 증명하고, 기술로 설득하는<br>마케팅 전문가 마정호</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/wearblesearch" target="_blank" rel="noopener" class="social-icon" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@wearablesearch" target="_blank" rel="noopener" class="social-icon" title="YouTube">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://wearablesearch.tistory.com/" target="_blank" rel="noopener" class="social-icon" title="Blog">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>강의</h4>
+        <ul>
+          <li><a href="https://forms.gle/Q3YURPWBqDyGFsCt5" target="_blank" rel="noopener">AI 디지털 마케팅</a></li>
+          <li><a href="#lectures">이커머스 쇼핑몰</a></li>
+          <li><a href="#lectures">성장 마케팅 과정</a></li>
+          <li><a href="#lectures">크라우드 펀딩 패키지</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>판매 채널</h4>
+        <ul>
+          <li><a href="https://smartstore.naver.com/wearablesearch" target="_blank" rel="noopener">네이버 스마트스토어</a></li>
+          <li><a href="https://store.kakao.com/wearablesearch" target="_blank" rel="noopener">카카오톡 스토어</a></li>
+          <li><a href="https://wearablesearch.co.kr/" target="_blank" rel="noopener">공식 홈페이지</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>소셜 미디어</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/wearblesearch" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@wearablesearch" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://blog.naver.com/geekstarter" target="_blank" rel="noopener">네이버 블로그</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이메일수집거부</a>
+      </div>
+      <div class="footer-info">
+        경기도 수원시 영통구 광교로 107 (이의동, 경기도중소기업지원센터) 지하 2층 웨어러블서치<br>
+        대표 마정호 · 사업자등록번호 831-03-00540 · 대표전화 0507-1452-5680 · jungho.ma@wearablesearch.com
+      </div>
+      <div class="footer-copy">Copyright © 2016–2026 Wearable Search. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── CURSOR GRADIENT ORB ── */
+  const orb = document.getElementById('cursorOrb');
+  const heroMesh = document.getElementById('heroMesh');
+  let mx = window.innerWidth / 2;
+  let my = window.innerHeight / 2;
+  let ox = mx, oy = my;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+
+    const nx = e.clientX / window.innerWidth;   // 0~1 (left→right)
+    const ny = e.clientY / window.innerHeight;  // 0~1 (top→bottom)
+
+    // Hue shifts: left=blue(215), right=purple(270), top=cool, bottom=warm
+    const h1 = Math.round(210 + nx * 70);         // 210–280
+    const h2 = Math.round(260 + ny * 80);         // 260–340
+    const h3 = Math.round(170 + nx * 50 + ny * 30); // 170–250
+
+    // Update orb gradient color
+    orb.style.background = `radial-gradient(circle,
+      hsla(${h1}, 85%, 62%, 0.12) 0%,
+      hsla(${h2}, 75%, 58%, 0.07) 45%,
+      transparent 70%)`;
+
+    // Update hero mesh background
+    heroMesh.style.background = `
+      radial-gradient(ellipse 55% 65% at ${20 + nx*10}% ${20 + ny*15}%, hsla(${h1}, 80%, 65%, 0.14), transparent),
+      radial-gradient(ellipse 45% 55% at ${75 + nx*10}% ${70 + ny*10}%, hsla(${h2}, 75%, 60%, 0.10), transparent),
+      radial-gradient(ellipse 60% 40% at ${45 + nx*8}% ${5 + ny*8}%,  hsla(${h3}, 85%, 68%, 0.08), transparent)`;
+  });
+
+  // Smooth lag for orb
+  (function loop() {
+    ox += (mx - ox) * 0.09;
+    oy += (my - oy) * 0.09;
+    orb.style.left = ox + 'px';
+    orb.style.top  = oy + 'px';
+    requestAnimationFrame(loop);
+  })();
+
+  /* ── SCROLL REVEAL ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── TAB SWITCHER ── */
+  function showTab(id, btn) {
+    document.querySelectorAll('.curr-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ── NAV SCROLL EFFECT ── */
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 1px 0 rgba(0,0,0,0.08)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
