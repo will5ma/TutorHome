@@ -1055,6 +1055,136 @@
 
     .footer-legal a:hover { color: rgba(255,255,255,0.60); }
 
+    /* ── EMAIL MODAL ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.50);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 9000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      animation: backdropIn 0.2s ease;
+    }
+
+    @keyframes backdropIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+      animation: modalIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      overflow: hidden;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.92) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 1.8rem 1.2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.025em;
+    }
+
+    .modal-close {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: #f5f5f7;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6e6e73;
+      font-size: 1rem;
+      line-height: 1;
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover { background: #e8e8ed; color: #1d1d1f; }
+
+    .modal-body {
+      padding: 1.6rem 1.8rem 2rem;
+    }
+
+    .modal-alert {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #fff4e5;
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .modal-alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+    .modal-alert-text {
+      font-size: 0.88rem;
+      color: #92400e;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-law-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .modal-law-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .modal-law-list li {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.83rem;
+      color: #3a3a3c;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-law-num {
+      font-weight: 700;
+      color: #0071e3;
+      flex-shrink: 0;
+      min-width: 2rem;
+    }
+
     .footer-info {
       font-size: 0.78rem;
       color: rgba(255,255,255,0.25);
@@ -1522,7 +1652,7 @@
     <div class="footer-bottom">
       <div class="footer-legal">
         <a href="#">개인정보처리방침</a>
-        <a href="#">이메일수집거부</a>
+        <a href="#" onclick="openEmailModal(event)">이메일수집거부</a>
       </div>
       <div class="footer-info">
         경기도 수원시 영통구 광교로 107 (이의동, 경기도중소기업지원센터) 지하 2층 웨어러블서치<br>
@@ -1533,7 +1663,61 @@
   </div>
 </footer>
 
+<!-- ── EMAIL MODAL ── -->
+<div class="modal-backdrop" id="emailModal" onclick="closeEmailModalOutside(event)">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle">이메일무단수집거부</span>
+      <button class="modal-close" onclick="closeEmailModal()" aria-label="닫기">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-alert">
+        <span class="modal-alert-icon">⚠️</span>
+        <p class="modal-alert-text">
+          웹사이트에 게시된 이메일 주소가 전자우편수집 프로그램이나 그 밖의 기술적 장치를 이용하여
+          무단으로 수집되는 것을 거부하며, 이를 위반 시 정보통신망법에 의해 형사처벌됨을 유념하시기 바랍니다.
+        </p>
+      </div>
+      <div class="modal-law-title">정보통신망 이용촉진 및 정보보호 등에 관한 법률 제50조의 2 — 전자우편주소의 무단수집행위 등 금지</div>
+      <ul class="modal-law-list">
+        <li>
+          <span class="modal-law-num">1항</span>
+          <span>누구든지 전자우편 주소의 수집을 거부하는 의사가 명시된 인터넷 홈페이지에서 자동으로 전자우편 주소를 수집하는 프로그램 및 그 밖의 기술적 장치를 이용한 전자우편주소를 수집하여서는 아니 된다.</span>
+        </li>
+        <li>
+          <span class="modal-law-num">2항</span>
+          <span>누구든지 제1항의 규정을 위반하여 수집된 전자우편 주소를 판매·유통하여서는 아니 된다.</span>
+        </li>
+        <li>
+          <span class="modal-law-num">3항</span>
+          <span>누구든지 제1항 및 제2항의 규정에 의하여 수집·판매 및 유통이 금지된 전자우편주소임을 알고 이를 정보전송에 이용하여서는 아니 된다.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <script>
+  /* ── EMAIL MODAL ── */
+  function openEmailModal(e) {
+    e.preventDefault();
+    document.getElementById('emailModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEmailModal() {
+    document.getElementById('emailModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeEmailModalOutside(e) {
+    if (e.target === document.getElementById('emailModal')) closeEmailModal();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeEmailModal();
+  });
+
   /* ── CURSOR GRADIENT ORB ── */
   const orb = document.getElementById('cursorOrb');
   const heroMesh = document.getElementById('heroMesh');
