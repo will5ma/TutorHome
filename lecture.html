@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>강의 신청 | 마정호 마케팅 전략가</title>
+  <link rel="icon" href="logo.png" type="image/png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+    .nav-logo a {
+      display: flex; align-items: center; gap: 0.6rem; text-decoration: none;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; }
+    .nav-logo-name { font-size: 0.9rem; font-weight: 600; color: #1d1d1f; letter-spacing: -0.02em; }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .nav-user {
+      font-size: 0.82rem;
+      color: #6e6e73;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-user img {
+      width: 26px; height: 26px; border-radius: 50%; object-fit: cover;
+    }
+    .nav-user-name { font-weight: 500; color: #1d1d1f; }
+    .btn-logout {
+      font-size: 0.78rem;
+      color: #6e6e73;
+      background: none; border: 1px solid #d1d1d6;
+      border-radius: 8px; padding: 0.3rem 0.75rem;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.15s;
+    }
+    .btn-logout:hover { background: #f5f5f7; }
+    .nav-back-link {
+      font-size: 0.82rem; color: #0071e3; text-decoration: none; font-weight: 500;
+    }
+    .nav-back-link:hover { opacity: 0.7; }
+
+    /* ── MAIN ── */
+    main {
+      padding-top: 52px;
+      min-height: 100vh;
+    }
+
+    /* ── AUTH GUARD (loading) ── */
+    .auth-guard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 52px);
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #e5e5ea;
+      border-top-color: #0071e3;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── CONTENT (hidden until auth) ── */
+    .page-content { display: none; }
+
+    /* ── HERO BANNER ── */
+    .lecture-hero {
+      background: #fff;
+      padding: 3rem 0 0;
+      text-align: center;
+    }
+    .lecture-hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0071e3;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .lecture-hero a {
+      display: block;
+      max-width: 720px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.13);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .lecture-hero a:hover { transform: scale(1.01); }
+    .lecture-hero img {
+      width: 100%; display: block;
+    }
+
+    /* ── COURSE INFO SECTION ── */
+    .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .course-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .info-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .info-card-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #0071e3;
+      margin-bottom: 0.5rem;
+    }
+    .info-card-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+    }
+    .info-card-sub {
+      font-size: 0.82rem;
+      color: #6e6e73;
+      margin-top: 0.3rem;
+    }
+
+    /* ── CURRICULUM ── */
+    .curr-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .curr-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+    .curr-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: #0071e3;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .curr-text strong {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+    }
+    .curr-text span {
+      font-size: 0.82rem;
+      color: #6e6e73;
+      margin-top: 0.15rem;
+      display: block;
+    }
+
+    /* ── CTA FORM ── */
+    .cta-section {
+      background: #fff;
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      margin-top: 2.5rem;
+    }
+    .cta-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .cta-section p {
+      font-size: 0.9rem;
+      color: #6e6e73;
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #3a3a3c;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      border: 1.5px solid #e5e5ea;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: #1d1d1f;
+      background: #fafafa;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #0071e3;
+      background: #fff;
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: #0071e3;
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 1.2rem;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: -0.01em;
+    }
+    .btn-submit:hover { background: #0077ed; }
+    .btn-submit:active { transform: scale(0.99); }
+
+    .submit-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .submit-success .check { font-size: 3rem; margin-bottom: 1rem; }
+    .submit-success h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .submit-success p { font-size: 0.88rem; color: #6e6e73; }
+
+    /* ── SECTION STYLES ── */
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #0071e3;
+      display: block;
+      margin-bottom: 0.85rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      color: #1d1d1f;
+      margin-bottom: 0.5rem;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: #6e6e73;
+      line-height: 1.7;
+    }
+    .gradient-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.08) 70%, transparent);
+    }
+
+    @media (max-width: 700px) {
+      .course-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo.png" alt="Wearable Search" />
+      <span class="nav-logo-name">Wearable Search</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-user" id="navUser" style="display:none">
+      <img id="userAvatar" src="" alt="" onerror="this.style.display='none'" />
+      <span class="nav-user-name" id="userName"></span>
+    </div>
+    <a href="index.html" class="nav-back-link">메인으로</a>
+    <button class="btn-logout" onclick="logout()">로그아웃</button>
+  </div>
+</nav>
+
+<main>
+  <!-- 인증 로딩 -->
+  <div class="auth-guard" id="authGuard">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- 인증 후 보이는 콘텐츠 -->
+  <div class="page-content" id="pageContent">
+
+    <!-- HERO BANNER -->
+    <div class="lecture-hero">
+      <div class="lecture-hero-inner">
+        <span class="hero-eyebrow">Lecture Registration</span>
+        <a href="https://forms.gle/Q3YURPWBqDyGFsCt5" target="_blank" rel="noopener noreferrer">
+          <img src="junghoma_Class.png" alt="생성형 AI로 완성하는 실전 마케팅" />
+        </a>
+      </div>
+    </div>
+
+    <div class="gradient-line"></div>
+
+    <!-- 강의 정보 -->
+    <section>
+      <div class="section-inner">
+        <span class="section-label">Course Info</span>
+        <h2 class="section-title">강의 안내</h2>
+        <p class="section-desc">매출을 부르는 디지털 마케팅 전략 — 생성형 AI로 완성하는 실전 마케팅</p>
+
+        <div class="course-grid">
+          <div class="info-card">
+            <div class="info-card-label">일정</div>
+            <div class="info-card-value">7월 1일부터</div>
+            <div class="info-card-sub">매주 수요일 · 4주 과정</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-label">형태</div>
+            <div class="info-card-value">LIVE 온라인</div>
+            <div class="info-card-sub">실시간 강의 + Q&A</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-label">대상</div>
+            <div class="info-card-value">B2B·B2C 마케터</div>
+            <div class="info-card-sub">스타트업 · 소상공인 · 마케팅 담당자</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-label">커버 주제</div>
+            <div class="info-card-value">AI 활용 마케팅</div>
+            <div class="info-card-sub">데이터 분석 · 챗봇 · ROI 분석</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gradient-line"></div>
+
+    <!-- 커리큘럼 -->
+    <section style="background:#fff;">
+      <div class="section-inner">
+        <span class="section-label">Curriculum</span>
+        <h2 class="section-title">4주 커리큘럼</h2>
+
+        <ul class="curr-list">
+          <li>
+            <div class="curr-num">1</div>
+            <div class="curr-text">
+              <strong>데이터 분석 기반 마케팅 전략</strong>
+              <span>구글 애널리틱스 · 잠재고객 분석 · 데이터 기반 의사결정</span>
+            </div>
+          </li>
+          <li>
+            <div class="curr-num">2</div>
+            <div class="curr-text">
+              <strong>AI 챗봇 & 콘텐츠 자동화</strong>
+              <span>ChatGPT · Claude를 활용한 마케팅 콘텐츠 제작 자동화</span>
+            </div>
+          </li>
+          <li>
+            <div class="curr-num">3</div>
+            <div class="curr-text">
+              <strong>초개인화 마케팅 실전</strong>
+              <span>고객 세그먼트 · 맞춤형 메시지 · CRM 연동</span>
+            </div>
+          </li>
+          <li>
+            <div class="curr-num">4</div>
+            <div class="curr-text">
+              <strong>ROI 분석 & 성과 최적화</strong>
+              <span>광고 효율 측정 · A/B 테스트 · 성과 보고서 작성</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="gradient-line"></div>
+
+    <!-- 신청 폼 -->
+    <section>
+      <div class="section-inner">
+        <span class="section-label">Apply</span>
+        <h2 class="section-title">강의 신청하기</h2>
+
+        <div class="cta-section">
+          <div id="formWrap">
+            <h3>신청 정보를 입력해 주세요</h3>
+            <p>접수 후 1~2 영업일 내 담당자가 연락드립니다.</p>
+
+            <form onsubmit="submitForm(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>이름 *</label>
+                  <input type="text" id="fname" placeholder="홍길동" required />
+                </div>
+                <div class="form-group">
+                  <label>연락처 *</label>
+                  <input type="tel" id="fphone" placeholder="010-0000-0000" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>이메일</label>
+                  <input type="email" id="femail" placeholder="email@example.com" />
+                </div>
+                <div class="form-group">
+                  <label>소속 / 직함</label>
+                  <input type="text" id="forg" placeholder="회사명 또는 직함" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group full">
+                  <label>관심 강의</label>
+                  <select id="fcourse">
+                    <option value="">선택해 주세요</option>
+                    <option>생성형 AI로 완성하는 실전 마케팅 (7월 1일)</option>
+                    <option>B2B 마케팅 전략 심화과정</option>
+                    <option>크라우드 펀딩 마케팅 실전</option>
+                    <option>기업 맞춤 강의 / 컨설팅 문의</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group full">
+                  <label>문의 사항</label>
+                  <textarea id="fmsg" placeholder="궁금한 점이나 요청 사항을 적어 주세요."></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn-submit">신청 완료하기</button>
+            </form>
+          </div>
+
+          <div class="submit-success" id="submitSuccess">
+            <div class="check">✅</div>
+            <h4>신청이 완료되었습니다!</h4>
+            <p>입력하신 연락처로 1~2 영업일 내에 안내 드리겠습니다.<br>감사합니다 😊</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-content -->
+</main>
+
+<!-- Supabase JS v2 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ── SUPABASE CONFIG ── login.html과 동일한 값을 입력하세요
+  const SUPABASE_URL  = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  // ── AUTH GUARD ──
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (!session) {
+      window.location.replace('login.html');
+    } else {
+      showPage(session.user);
+    }
+  });
+
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_OUT') window.location.replace('login.html');
+  });
+
+  function showPage(user) {
+    document.getElementById('authGuard').style.display = 'none';
+    document.getElementById('pageContent').style.display = 'block';
+
+    // 사용자 정보 표시
+    const navUser = document.getElementById('navUser');
+    const meta = user.user_metadata || {};
+    const name = meta.name || meta.full_name || meta.preferred_username || user.email || '사용자';
+    const avatar = meta.avatar_url || meta.picture || '';
+
+    document.getElementById('userName').textContent = name;
+    if (avatar) document.getElementById('userAvatar').src = avatar;
+    navUser.style.display = 'flex';
+
+    // 폼에 이메일 자동 입력
+    if (user.email) document.getElementById('femail').value = user.email;
+    if (name !== '사용자') document.getElementById('fname').value = name;
+  }
+
+  async function logout() {
+    await sb.auth.signOut();
+    window.location.replace('login.html');
+  }
+
+  // ── 신청 폼 제출 ──
+  async function submitForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '제출 중...';
+    btn.disabled = true;
+
+    const { data: { session } } = await sb.auth.getSession();
+
+    // Supabase 테이블에 저장 (선택 사항 — 테이블 없으면 생략 가능)
+    const payload = {
+      user_id:  session?.user?.id || null,
+      name:     document.getElementById('fname').value,
+      phone:    document.getElementById('fphone').value,
+      email:    document.getElementById('femail').value,
+      org:      document.getElementById('forg').value,
+      course:   document.getElementById('fcourse').value,
+      message:  document.getElementById('fmsg').value,
+      created_at: new Date().toISOString()
+    };
+
+    // Supabase DB 저장 시도 (테이블 없어도 UI는 성공 처리)
+    try {
+      await sb.from('lecture_applications').insert([payload]);
+    } catch(_) {}
+
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('submitSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>

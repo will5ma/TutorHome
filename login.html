@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인 | 마정호 마케팅 전략가</title>
+  <link rel="icon" href="logo.png" type="image/png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+      background: #f5f5f7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+    .nav-logo a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; }
+    .nav-logo-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+    }
+    .nav-back {
+      font-size: 0.82rem;
+      color: #0071e3;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-back:hover { opacity: 0.7; }
+
+    /* ── LOGIN CARD ── */
+    .login-wrap {
+      width: 100%;
+      max-width: 420px;
+      padding: 1rem;
+      margin-top: 52px;
+    }
+    .login-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 3rem 2.5rem 2.5rem;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.10);
+      text-align: center;
+    }
+    .login-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      margin: 0 auto 1.5rem;
+      display: block;
+      object-fit: cover;
+    }
+    .login-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .login-desc {
+      font-size: 0.88rem;
+      color: #6e6e73;
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+    }
+
+    /* ── KAKAO BUTTON ── */
+    .btn-kakao {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: #FEE500;
+      color: rgba(0,0,0,0.85);
+      border: none;
+      border-radius: 14px;
+      font-size: 0.97rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      letter-spacing: -0.01em;
+    }
+    .btn-kakao:hover { background: #f0d900; }
+    .btn-kakao:active { transform: scale(0.98); }
+    .btn-kakao svg { flex-shrink: 0; }
+
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      color: #aaa;
+      font-size: 0.78rem;
+    }
+    .login-divider::before, .login-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e5e5ea;
+    }
+
+    .login-notice {
+      font-size: 0.76rem;
+      color: #aeaeb2;
+      line-height: 1.6;
+      margin-top: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #f0f0f0;
+    }
+    .login-notice a { color: #0071e3; text-decoration: none; }
+
+    /* ── LOADING / ERROR STATE ── */
+    .auth-loading {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #6e6e73;
+    }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid #e5e5ea;
+      border-top-color: #0071e3;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .auth-error {
+      display: none;
+      background: #fff2f2;
+      border: 1px solid #ffcdd2;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: #c0392b;
+      margin-top: 1rem;
+      text-align: left;
+    }
+
+    @media (max-width: 480px) {
+      .login-card { padding: 2.5rem 1.5rem 2rem; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="logo.png" alt="Wearable Search" />
+      <span class="nav-logo-name">Wearable Search</span>
+    </a>
+  </div>
+  <a href="index.html" class="nav-back">← 메인으로</a>
+</nav>
+
+<div class="login-wrap">
+  <div class="login-card">
+    <img src="logo.png" alt="로고" class="login-logo" />
+    <h1 class="login-title">강의 신청</h1>
+    <p class="login-desc">
+      강의 신청 페이지는 로그인 후 이용 가능합니다.<br>
+      카카오톡으로 간편하게 로그인하세요.
+    </p>
+
+    <button class="btn-kakao" onclick="loginWithKakao()" id="kakaoBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(0,0,0,0.85)">
+        <path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.587 5.078 4 6.542V21l3.5-2.1A11.4 11.4 0 0 0 12 19c5.523 0 10-3.477 10-7.8S17.523 3 12 3z"/>
+      </svg>
+      카카오톡으로 로그인
+    </button>
+
+    <div class="auth-loading" id="loadingEl">
+      <div class="spinner"></div>
+      <span>로그인 처리 중...</span>
+    </div>
+    <div class="auth-error" id="errorEl"></div>
+
+    <p class="login-notice">
+      로그인 시 <a href="#">이용약관</a> 및 <a href="#">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+    </p>
+  </div>
+</div>
+
+<!-- Supabase JS v2 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ── SUPABASE CONFIG ── 아래 값을 Supabase 프로젝트 설정에서 복사하세요
+  const SUPABASE_URL  = 'YOUR_SUPABASE_URL';   // 예: https://xxxx.supabase.co
+  const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  const LECTURE_PAGE = 'lecture.html';
+
+  // 이미 로그인된 경우 바로 이동
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (session) window.location.replace(LECTURE_PAGE);
+  });
+
+  // OAuth 콜백 처리 (hash 또는 search param 방식 모두 대응)
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      window.location.replace(LECTURE_PAGE);
+    }
+  });
+
+  async function loginWithKakao() {
+    const btn = document.getElementById('kakaoBtn');
+    const loading = document.getElementById('loadingEl');
+    const errorEl = document.getElementById('errorEl');
+
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    loading.style.display = 'flex';
+    errorEl.style.display = 'none';
+
+    const redirectTo = window.location.origin + window.location.pathname.replace('login.html', '') + LECTURE_PAGE;
+
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: { redirectTo }
+    });
+
+    if (error) {
+      loading.style.display = 'none';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      errorEl.textContent = '로그인 중 오류가 발생했습니다: ' + error.message;
+      errorEl.style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
