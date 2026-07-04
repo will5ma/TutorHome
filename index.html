@@ -137,10 +137,7 @@
       justify-content: center;
       text-align: center;
       overflow: hidden;
-      background:
-        radial-gradient(ellipse 70% 60% at 22% 15%, rgba(255,255,255,0.10), transparent 60%),
-        radial-gradient(ellipse 60% 55% at 85% 85%, rgba(10,40,120,0.35), transparent 60%),
-        linear-gradient(155deg, #2e86eb 0%, #1c66d8 45%, #0f45b4 75%, #0a3494 100%);
+      background: #ffffff;
     }
 
     .hero-img-bg {
@@ -149,9 +146,8 @@
       background-image: url('Image.png');
       background-size: cover;
       background-position: center;
-      filter: blur(24px) brightness(1.1) saturate(0.7);
-      opacity: 0.14;
-      mix-blend-mode: overlay;
+      filter: blur(22px) brightness(1.05) saturate(0.85);
+      opacity: 0.18;
       z-index: 0;
     }
 
@@ -160,9 +156,9 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(15,60,180,0.15) 0%,
-        rgba(10,45,150,0.05) 45%,
-        rgba(6,30,110,0.38) 100%
+        rgba(255,255,255,0.82) 0%,
+        rgba(255,255,255,0.72) 50%,
+        rgba(255,255,255,0.88) 100%
       );
       z-index: 0;
     }
@@ -173,9 +169,6 @@
       pointer-events: none;
       z-index: 1;
       transition: background 0.4s ease;
-      background:
-        radial-gradient(ellipse 55% 50% at 25% 20%, rgba(255,214,10,0.20), transparent 65%),
-        radial-gradient(ellipse 45% 45% at 78% 75%, rgba(255,255,255,0.14), transparent 65%);
     }
 
     .hero-content {
@@ -284,23 +277,20 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: #ffd400;
-      color: #12234f;
+      background: #0071e3;
+      color: #fff;
       text-decoration: none;
-      padding: 0.9rem 2.2rem;
-      border-radius: 12px;
-      border: 2.5px solid #12234f;
-      font-size: 1.05rem;
-      font-weight: 800;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
       letter-spacing: -0.01em;
-      box-shadow: 4px 4px 0 rgba(10,30,90,0.35);
-      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      transition: all 0.25s;
     }
 
     .btn-blue:hover {
-      background: #ffe14d;
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 rgba(10,30,90,0.35);
+      background: #0077ed;
+      transform: scale(1.02);
     }
 
     .btn-ghost {
@@ -1575,7 +1565,7 @@
   <div class="hero-mesh" id="heroMesh"></div>
   <div class="hero-content">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSf4RBJKTk8Gb-OCBYi8KHX6gmaS_e6bQv223nJH6gmsPcxhQw/viewform" target="_blank" rel="noopener noreferrer">
-      <img src="claude_agent_master_hero.png" alt="클로드 학습 에이전트 마스터" class="hero-name-img" />
+      <img src="claude_agent_master.png" alt="클로드 학습 에이전트 마스터" class="hero-name-img hero-name-img--portrait" />
     </a>
     <div class="hero-btns">
       <a href="login.html" class="btn-blue">강의 신청</a>
@@ -2289,19 +2279,19 @@
     // Hue shifts: left=blue(215), right=purple(270), top=cool, bottom=warm
     const h1 = Math.round(210 + nx * 70);         // 210–280
     const h2 = Math.round(260 + ny * 80);         // 260–340
+    const h3 = Math.round(170 + nx * 50 + ny * 30); // 170–250
 
-    // Update orb gradient color (used outside hero)
+    // Update orb gradient color
     orb.style.background = `radial-gradient(circle,
       hsla(${h1}, 85%, 62%, 0.12) 0%,
       hsla(${h2}, 75%, 58%, 0.07) 45%,
       transparent 70%)`;
 
-    // Hero mesh: golden highlighter glow + cool white-blue glow (matches course poster tone)
-    const gold = Math.round(42 + nx * 14);        // 42–56 (amber → yellow)
-    const cool = Math.round(195 + ny * 25);       // 195–220 (sky blue → azure)
+    // Update hero mesh background
     heroMesh.style.background = `
-      radial-gradient(ellipse 55% 50% at ${20 + nx*15}% ${18 + ny*18}%, hsla(${gold}, 95%, 60%, 0.22), transparent 65%),
-      radial-gradient(ellipse 45% 45% at ${75 + nx*12}% ${72 + ny*12}%, hsla(${cool}, 90%, 70%, 0.16), transparent 65%)`;
+      radial-gradient(ellipse 55% 65% at ${20 + nx*10}% ${20 + ny*15}%, hsla(${h1}, 80%, 65%, 0.14), transparent),
+      radial-gradient(ellipse 45% 55% at ${75 + nx*10}% ${70 + ny*10}%, hsla(${h2}, 75%, 60%, 0.10), transparent),
+      radial-gradient(ellipse 60% 40% at ${45 + nx*8}% ${5 + ny*8}%,  hsla(${h3}, 85%, 68%, 0.08), transparent)`;
   });
 
   // Smooth lag for orb
