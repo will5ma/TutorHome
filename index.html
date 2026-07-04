@@ -647,6 +647,27 @@
       letter-spacing: -0.01em;
     }
 
+    .achieve-card--blog {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .achieve-badge-img {
+      width: 76px;
+      height: auto;
+      flex-shrink: 0;
+      filter: drop-shadow(0 6px 16px rgba(170,130,30,0.35));
+      transition: transform 0.25s;
+    }
+
+    .achieve-card--blog:hover .achieve-badge-img {
+      transform: scale(1.06);
+    }
+
     .achieve-award {
       display: flex;
       align-items: center;
@@ -1741,11 +1762,14 @@
         <div class="achieve-label">투자 유치 견인 & 국책과제 확보</div>
         <div class="achieve-detail">60억 투자유치 견인, 국책과제(BK21, World Class 300 등) 확보를 성공적으로 이끌었던 경험</div>
       </div>
-      <div class="achieve-card">
-        <div class="achieve-num">2025</div>
-        <div class="achieve-label">올해의 블로그 선정</div>
-        <div class="achieve-detail">네이버 Geekstarter 블로그가 2025년 올해의 블로그로 선정</div>
-      </div>
+      <a href="https://blog.naver.com/geekstarter" target="_blank" rel="noopener noreferrer" class="achieve-card achieve-card--blog">
+        <div class="achieve-text">
+          <div class="achieve-num">2025</div>
+          <div class="achieve-label">올해의 블로그 선정</div>
+          <div class="achieve-detail">네이버 Geekstarter 블로그가 2025년 올해의 블로그로 선정</div>
+        </div>
+        <img src="blog_badge.png" alt="2025 올해의 blog 배지" class="achieve-badge-img" />
+      </a>
     </div>
   </div>
 </section>
