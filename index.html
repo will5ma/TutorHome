@@ -704,36 +704,6 @@
     /* ── CURRICULUM ── */
     #curriculum { background: #ffffff; }
 
-    .curr-tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 3rem;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      padding-bottom: 0;
-    }
-
-    .tab-btn {
-      padding: 0.65rem 1.2rem;
-      border: none;
-      background: transparent;
-      color: #6e6e73;
-      font-size: 0.88rem;
-      font-weight: 500;
-      cursor: pointer;
-      letter-spacing: -0.01em;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
-      transition: all 0.2s;
-      font-family: inherit;
-    }
-
-    .tab-btn.active {
-      color: #0071e3;
-      border-bottom-color: #0071e3;
-    }
-
-    .tab-btn:hover:not(.active) { color: #1d1d1f; }
-
     .curr-content { display: none; }
     .curr-content.active {
       display: grid;
@@ -1809,48 +1779,12 @@
       <h2 class="section-title">교육 커리큘럼</h2>
       <p class="section-body" style="margin-top: 0.75rem; margin-bottom: 3rem;">비즈니스 성장 단계에 맞는 맞춤형 커리큘럼을 제공합니다.</p>
     </div>
-    <div class="curr-tabs reveal">
-      <button class="tab-btn active" onclick="showTab('data', this)">📊 데이터 분석</button>
-      <button class="tab-btn" onclick="showTab('online', this)">💻 온라인 마케팅</button>
-      <button class="tab-btn" onclick="showTab('shopping', this)">🛒 쇼핑몰·펀딩</button>
-      <button class="tab-btn" onclick="showTab('ai', this)">🤖 AI 마케팅</button>
-    </div>
-    <div id="tab-data" class="curr-content active reveal">
+    <div class="curr-content active reveal">
       <div class="curr-video-card">
         <div class="curr-video-title">🎬 하네스 엔지니어링 with 클로드코드</div>
         <div class="curr-video-embed">
           <iframe src="https://www.youtube.com/embed/cAQowY41IJo?list=PLQe-J09YJ7iQ" title="하네스 엔지니어링 with 클로드코드" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
-      </div>
-    </div>
-    <div id="tab-online" class="curr-content reveal">
-      <div class="curr-card">
-        <div class="curr-card-title">🎯 타겟 마케팅</div>
-        <div class="curr-card-desc">창업 초기 이벤트 프로모션 및 네이버 블로그, 카페 활성화로 커뮤니티 고객 확보</div>
-      </div>
-      <div class="curr-card">
-        <div class="curr-card-title">💰 유료 광고 전략</div>
-        <div class="curr-card-desc">구글 GDN, 유튜브, 검색광고 캠페인 운영을 통한 전환율 극대화</div>
-      </div>
-    </div>
-    <div id="tab-shopping" class="curr-content reveal">
-      <div class="curr-card">
-        <div class="curr-card-title">🏪 채널 전략</div>
-        <div class="curr-card-desc">스마트스토어, 카카오쇼핑 등 이커머스 입점 및 크라우드 펀딩 플랫폼별 특화 판매 전략 습득</div>
-      </div>
-      <div class="curr-card">
-        <div class="curr-card-title">⚙️ 운영 최적화</div>
-        <div class="curr-card-desc">자사몰 성장을 위한 운영 노하우와 고객 유입을 극대화하는 쇼핑몰 최적화 기법</div>
-      </div>
-    </div>
-    <div id="tab-ai" class="curr-content reveal">
-      <div class="curr-card">
-        <div class="curr-card-title">🧠 데이터 기반 인사이트</div>
-        <div class="curr-card-desc">고객 행동 데이터를 머신러닝으로 분석해 타겟 세분화 및 맞춤형 전략 수립</div>
-      </div>
-      <div class="curr-card">
-        <div class="curr-card-title">🤖 업무 자동화</div>
-        <div class="curr-card-desc">마케팅 캠페인 운영, 데이터 분석 등 반복 업무를 자동화하여 생산성 극대화</div>
       </div>
     </div>
   </div>
@@ -2309,14 +2243,6 @@
   }, { threshold: 0.10 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  /* ── TAB SWITCHER ── */
-  function showTab(id, btn) {
-    document.querySelectorAll('.curr-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
 
   /* ── NAV SCROLL EFFECT ── */
   window.addEventListener('scroll', () => {
